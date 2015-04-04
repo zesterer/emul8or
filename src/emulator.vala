@@ -481,7 +481,20 @@ namespace Emul8or
 		public void opFX0A(uint16 opcode)
 		{
 			//TODO Await key press
-			this.registers[(opcode & 0x0F00) >> 8] = 0;
+			
+			uint8 count = 0;
+			
+			for (count = 0; count < 16; count ++)
+			{
+				if (this.keys[count])
+				{
+					this.registers[(opcode & 0x0F00) >> 8] = count;
+					break;
+				}
+			}
+			
+			if (count == 16)
+				this.program_counter -= 2;
 		}
 		
 		public void opFX15(uint16 opcode)

@@ -92,6 +92,30 @@ namespace Emul8or
 							this.emulator.keys[9] = val;
 							break;
 						
+						case (SDL.KeySymbol.a):
+							this.emulator.keys[10] = val;
+							break;
+						
+						case (SDL.KeySymbol.b):
+							this.emulator.keys[11] = val;
+							break;
+						
+						case (SDL.KeySymbol.c):
+							this.emulator.keys[12] = val;
+							break;
+						
+						case (SDL.KeySymbol.d):
+							this.emulator.keys[13] = val;
+							break;
+						
+						case (SDL.KeySymbol.e):
+							this.emulator.keys[14] = val;
+							break;
+						
+						case (SDL.KeySymbol.f):
+							this.emulator.keys[15] = val;
+							break;
+						
 						default:
 							break;
 					}
