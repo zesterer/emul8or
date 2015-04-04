@@ -32,7 +32,7 @@ You *may* need to modify your ``/usr/include/SDL/SDL_keysym.h`` file for this to
 
 ## Usage
 
-Controls are mapped to the number keys, 0-9.
+There are 16 keys. These are mapped to the number keys (0-9) and the letters (A-F).
 
 For more information, once compiled run:
 
