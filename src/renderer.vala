@@ -9,11 +9,15 @@ namespace Emul8or
 		private int width = 64;
 		private int height = 32;
 		
+		private float[,] glow_value;
+		
 		private int scale = 8;
 		
 		public Renderer(Emulator emulator, int scale)
 		{
 			stdout.printf("Starting renderer...\n");
+			
+			this.glow_value = new float[64, 32];
 			
 			this.emulator = emulator;
 			this.scale = scale;
@@ -34,11 +38,22 @@ namespace Emul8or
 				for (int y = 0; y < this.height; y ++)
 				{
 					if (this.emulator.screen[x, y] == 1)
-						SDLGraphics.Rectangle.fill_color(this.screen, (int16)(x * this.scale), (int16)(y * this.scale), (int16)((x + 1) * this.scale), (int16)((y + 1) * this.scale), (uint32)(-1));
+						this.glow_value[x, y] = 2.0f;
+					else
+						this.glow_value[x, y] = (float)Math.fmax(0.0f, this.glow_value[x, y] - 0.5f);
+					
+					uint8 glow = (uint8)Math.fmin(this.glow_value[x, y] * 256.0f, 255.0f);
+					
+					//if (glow < 225)
+						//glow = 0;
+					
+					uint32 val = (glow << 8) + (glow << 16) + (glow << 24) + 255;
+					
+					SDLGraphics.Rectangle.fill_color(this.screen, (int16)(x * this.scale), (int16)(y * this.scale), (int16)((x + 1) * this.scale), (int16)((y + 1) * this.scale), (uint32)(val));
 				}
 			}
 			
-			screen.flip();
+			this.screen.flip();
 			
 			SDL.Event event;
 			while (SDL.Event.poll(out event) == 1)

@@ -11,7 +11,8 @@ src/emulator.vala \
 
 VALA_PACKAGES=--pkg sdl --pkg sdl-gfx -X -lSDL_gfx -X -I/usr/include/SDL --Xcc=-I/usr/include/SDL -X -lm \
 
-VALA_ADDITIONAL=-X -g -X -fsanitize=address
+VALA_ADDITIONAL=-X -g
+# -X -fsanitize=address
 
 LINES_VALA=`( find src -name '*.vala' -print0 | xargs -0 cat ) | wc -l`
 

@@ -421,13 +421,13 @@ namespace Emul8or
 		
 		public void opEX9E(uint16 opcode)
 		{
-			if (this.keys[(opcode & 0x0F00) >> 8])
+			if (this.keys[(opcode & 0x0F00) >> 8] == true)
 				this.program_counter += 2;
 		}
 		
 		public void opEXA1(uint16 opcode)
 		{
-			if (!this.keys[(opcode & 0x0F00) >> 8])
+			if (this.keys[(opcode & 0x0F00) >> 8] == false)
 				this.program_counter += 2;
 		}
 		
